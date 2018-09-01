@@ -5,7 +5,7 @@ let blocks = document.getElementsByClassName("block")
 for(let i = 0; i < blocks.length; i++){
     blocks[i].addEventListener("click", e => {
         if(e.target.innerHTML == "") {
-            console.log(`row: ${e.target.parentElement.id} col: ${e.target.id}`)
+            console.log(e.target.parentElement.id, e.target.id)
 
             //mark block if it's the player's turn
             if(isPlayersTurn) {
@@ -17,6 +17,17 @@ for(let i = 0; i < blocks.length; i++){
         }
 
     })
+}
+
+function getAllBlocks(){
+    let matrix = []
+    let rows = document.getElementsByClassName("row")
+    
+    for(let i = 0; i < rows.length; i++) {
+        matrix.push(rows[i].children)
+    }
+
+    return matrix;
 }
 
 function getFreeBlocks(){
@@ -33,6 +44,10 @@ function cpuTurn() {
     let freeBlocks = getFreeBlocks()
     let choice = Math.floor(Math.random() * freeBlocks.length)
 
-    freeBlocks[choice].innerHTML = "O"
-    isPlayersTurn = !isPlayersTurn
+    if(freeBlocks.length > 0) {
+        freeBlocks[choice].innerHTML = "O"
+        isPlayersTurn = !isPlayersTurn
+    } else {
+        alert("game is over")
+    }
 }
