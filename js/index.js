@@ -33,7 +33,7 @@ function cpuTurn() {
 
 function checkIfWinner(){
     let board = getAllBlocks()
-    console.log(checkRows(board))
+    console.log(checkColumns(board))
 }
 
 function checkRows(board){
@@ -43,6 +43,23 @@ function checkRows(board){
         }
     }
     return false;
+}
+
+function checkColumns(board){
+    for(let i = 0; i < 3; i++){
+        if( areEqual(board[0][i],board[1][i],board[2][i]) ){
+            return(board[0][i].innerHTML)
+        }
+    }
+    return false;
+}
+
+function checkDiagonal(board){
+    if(board[0][0].innerHTML == board[1][1].innerHTML && board[1][1].innerHTML == board[2][2].innerHTML ||
+       board[0][2].innerHTML == board[1][1].innerHTML && board[1][1].innerHTML == board[2][0].innerHTML) {
+           return(board[0][0].innerHTML)
+       }
+    return false
 }
 
 function getAllBlocks(){
