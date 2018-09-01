@@ -5,8 +5,7 @@ let blocks = document.getElementsByClassName("block")
 
 for(let i = 0; i < blocks.length; i++){
     blocks[i].addEventListener("click", e => {
-        if(e.target.innerHTML == "") {
-
+        if(e.target.innerHTML == "" && e.target.localName == "td") {
             //mark block if it's the player's turn
             if(isPlayersTurn) {
                 e.target.innerHTML = '<i class="fas fa-times"></i>'
@@ -18,10 +17,8 @@ for(let i = 0; i < blocks.length; i++){
                 } else {
                     cpuTurn()
                 }
-            }
-            
+            }            
         }
-
     })
 }
 
