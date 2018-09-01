@@ -5,13 +5,17 @@ let blocks = document.getElementsByClassName("block")
 for(let i = 0; i < blocks.length; i++){
     blocks[i].addEventListener("click", e => {
         if(e.target.innerHTML == "") {
-            console.log(e.target.parentElement.id, e.target.id)
 
             //mark block if it's the player's turn
             if(isPlayersTurn) {
                 e.target.innerHTML = "X"
                 isPlayersTurn = !isPlayersTurn
-                cpuTurn()
+                let winner = checkIfWinner()
+                if(winner){
+                    console.log(winner)
+                } else {
+                    cpuTurn()
+                }
             }
             
         }
@@ -26,15 +30,33 @@ function cpuTurn() {
     if(freeBlocks.length > 0) {
         freeBlocks[choice].innerHTML = "O"
         isPlayersTurn = !isPlayersTurn
+        let winner = checkIfWinner()
+        if(winner){
+            console.log(winner)
+        }
     } else {
-        alert("game is over")
+        let winner = checkIfWinner()
+        if(winner) console.log(winner)
+        else console.log(draw)
     }
 }
 
 function checkIfWinner(){
     let board = getAllBlocks()
-    console.log(checkColumns(board))
+    let results = {
+        rows: checkRows(board),
+        diagonal: checkDiagonal(board),
+        columns: checkColumns(board)
+    }
+
+    let winner = Object.values(results).find(element => {
+        return element != false
+    })
+
+    if(winner) return(winner)
+    else return(false)
 }
+
 
 function checkRows(board){
     for(let i = 0; i < board.length; i++) {
@@ -47,7 +69,7 @@ function checkRows(board){
 
 function checkColumns(board){
     for(let i = 0; i < 3; i++){
-        if( areEqual(board[0][i],board[1][i],board[2][i]) ){
+        if( areEqual(board[0][i], board[1][i], board[2][i]) ){
             return(board[0][i].innerHTML)
         }
     }
@@ -55,9 +77,9 @@ function checkColumns(board){
 }
 
 function checkDiagonal(board){
-    if(board[0][0].innerHTML == board[1][1].innerHTML && board[1][1].innerHTML == board[2][2].innerHTML ||
-       board[0][2].innerHTML == board[1][1].innerHTML && board[1][1].innerHTML == board[2][0].innerHTML) {
-           return(board[0][0].innerHTML)
+    if(areEqual(board[0][0], board[1][1], board[2][2]) ||
+       areEqual(board[0][2] ,board[1][1], board[2][0]) ) {
+           return(board[1][1].innerHTML)
        }
     return false
 }
