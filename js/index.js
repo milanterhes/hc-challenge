@@ -9,7 +9,8 @@ for(let i = 0; i < blocks.length; i++){
 
             //mark block if it's the player's turn
             if(isPlayersTurn) {
-                e.target.innerHTML = "X"
+                e.target.innerHTML = '<i class="fas fa-times"></i>'
+                e.target.classList.add("blue")
                 isPlayersTurn = !isPlayersTurn
                 let winner = checkIfWinner()
                 if(winner){
@@ -27,6 +28,7 @@ for(let i = 0; i < blocks.length; i++){
 function reset(){
     for(let i = 0; i < blocks.length; i++){
         blocks[i].innerHTML = ""
+        blocks[i].classList.remove("red","blue")
     }
     isPlayersTurn = true
     alertPanel.innerHTML = ""
@@ -37,7 +39,8 @@ function cpuTurn() {
     let choice = Math.floor(Math.random() * freeBlocks.length)
 
     if(freeBlocks.length > 0) {
-        freeBlocks[choice].innerHTML = "O"
+        freeBlocks[choice].innerHTML = '<i class="far fa-circle"></i>'
+        freeBlocks[choice].classList.add("red")
         isPlayersTurn = !isPlayersTurn
         let winner = checkIfWinner()
         if(winner){

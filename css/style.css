@@ -14,3 +14,13 @@ td {
 .container {
     text-align: center;
 }
+
+.red {
+    background-color: #D63554;
+    color: white;
+}
+
+.blue {
+    background-color: #1500ff;
+    color: white;
+}
