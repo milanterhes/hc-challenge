@@ -12,7 +12,7 @@ for(let i = 0; i < blocks.length; i++){
                 isPlayersTurn = !isPlayersTurn
                 let winner = checkIfWinner()
                 if(winner){
-                    console.log(winner)
+                    announceWinner(winner)
                 } else {
                     cpuTurn()
                 }
@@ -36,8 +36,8 @@ function cpuTurn() {
         }
     } else {
         let winner = checkIfWinner()
-        if(winner) console.log(winner)
-        else console.log(draw)
+        if(winner) announceWinner(winner)
+        else announceWinner("draw")
     }
 }
 
@@ -55,6 +55,21 @@ function checkIfWinner(){
 
     if(winner) return(winner)
     else return(false)
+}
+
+function announceWinner(winner){
+    let alertPanel = document.getElementById("alertPanel")
+
+    switch(winner){
+        case "X":
+            alertPanel.innerHTML = '<span style= "color: green">You won!</span>'
+            break;
+        case "O":
+            alertPanel.innerHTML = '<span style= "color: red">The computer won!</span>'
+            break;
+        case "draw":
+            alerPanel.innerHTML = '<span>It\'s a draw! Try again.</span>'
+    }
 }
 
 
