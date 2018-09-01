@@ -73,10 +73,10 @@ function checkIfWinner(){
 function announceWinner(winner){
 
     switch(winner){
-        case "X":
+        case '<i class="fas fa-times"></i>':
             alertPanel.innerHTML = '<span style= "color: green">You won!</span>'
             break;
-        case "O":
+        case '<i class="far fa-circle"></i>':
             alertPanel.innerHTML = '<span style= "color: red">The computer won!</span>'
             break;
         case "draw":
