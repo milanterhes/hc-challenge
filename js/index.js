@@ -1,5 +1,6 @@
 let isPlayersTurn = true;
-
+let resetButton = document.getElementById("resetButton")
+let alertPanel = document.getElementById("alertPanel")
 let blocks = document.getElementsByClassName("block")
 
 for(let i = 0; i < blocks.length; i++){
@@ -23,6 +24,14 @@ for(let i = 0; i < blocks.length; i++){
     })
 }
 
+function reset(){
+    for(let i = 0; i < blocks.length; i++){
+        blocks[i].innerHTML = ""
+    }
+    isPlayersTurn = true
+    alertPanel.innerHTML = ""
+}
+
 function cpuTurn() {
     let freeBlocks = getFreeBlocks()
     let choice = Math.floor(Math.random() * freeBlocks.length)
@@ -32,7 +41,8 @@ function cpuTurn() {
         isPlayersTurn = !isPlayersTurn
         let winner = checkIfWinner()
         if(winner){
-            console.log(winner)
+            announceWinner(winner)
+            isPlayersTurn = false
         }
     } else {
         let winner = checkIfWinner()
@@ -58,7 +68,6 @@ function checkIfWinner(){
 }
 
 function announceWinner(winner){
-    let alertPanel = document.getElementById("alertPanel")
 
     switch(winner){
         case "X":
@@ -68,7 +77,7 @@ function announceWinner(winner){
             alertPanel.innerHTML = '<span style= "color: red">The computer won!</span>'
             break;
         case "draw":
-            alerPanel.innerHTML = '<span>It\'s a draw! Try again.</span>'
+            alertPanel.innerHTML = '<span>It\'s a draw! Try again.</span>'
     }
 }
 
